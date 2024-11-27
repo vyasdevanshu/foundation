@@ -453,7 +453,7 @@ We will consider that order items would always be exploded in OMS and implement 
 Considering that order items would always be exploded and each order item would represent a single quantity, there should ideally only be one associated inventory reservation record to be removed,
 1. Input
    - orderId
-   - orderItemSequId
+   - orderItemSeqId
    - shipGroupSeqId
 2. Find OrderItemShipGroupInvRes records (ideally only one should be returned) and delete them.
 3. Call create#InventoryItemDetail inline with relevant input.  This can be a simple entity auto operation.
@@ -465,10 +465,10 @@ Considering that order items would always be exploded and each order item would 
    - statusId
    - changeReason
    - statusDateTime
-3. Validate StatusValidChange, a helper method _check#ValidStatusChange_ could be implemented to return boolean value.
+3. Validate if the status change is valid using a helper service _check#ValidStatusChange_ that could be implemented to return a boolean value.
 4. Update OrderItem.statusId.
 5. Call create#OrderStatus inline with relevant input. This can be a simple entity auto operation.
-6. If statusId is canceled or completed call check#CancelCompleteSalesOrder inline, refer implementation details below.
+6. If statusId is canceled or completed call check#CancelCompleteSalesOrder inline, refer to the implementation details below.
 
 **check#CancelCompleteSalesOrder**
 1. Input
